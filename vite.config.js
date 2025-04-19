@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/Plat-teste/', // <-- Adicione esta linha
+  base: '/Plat-teste/',
   plugins: [react()],
   server: {
     proxy: {
