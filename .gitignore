@@ -1,0 +1,37 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios de build
+dist/
+build/
+
+# Arquivos de ambiente
+.env
+
+# Cache do npm
+.npm
+
+# Cache do yarn
+.yarn
+
+# Cache do Vercel
+.vercel
+
+# Arquivos de lock
+package-lock.json
+yarn.lock
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Outros
+*.swp
+*.swo
