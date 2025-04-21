@@ -94,7 +94,7 @@ function Login({ setIsAuthenticated }) {
   
   return (
     <LoginContainer>
-      <LoginTitle>Acesso ao Painel</LoginTitle>
+      <LoginTitle>Acesso Restrito a Administradores</LoginTitle>
       
       <form onSubmit={handleSubmit}>
         <FormGroup>
