@@ -9,7 +9,7 @@
         "server": "nodemon server.cjs",
         "client": "vite",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
-        "build": "vite build",
+        "build": "npx vite build", 
         "proxy": "http://localhost:5000",
         "test": "jest"
     },
