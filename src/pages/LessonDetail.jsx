@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/Button';
 import FileList from '../components/FileList';
-import AudioPlayer from '../components/audioplayer';
+import AudioPlayer from '../components/AudioPlayerr';
 
 const LessonContainer = styled.div`
   max-width: 600px;
