@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     {/* Adicione a propriedade basename aqui */}
-    <BrowserRouter basename="/plat-teste">
+    <BrowserRouter basename="/">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
