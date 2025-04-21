@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Button from '../../components/button';
+import Button from '../../components/Button';
 
 const FilesContainer = styled.div`
   max-width: 1200px;
@@ -227,9 +227,13 @@ const SuccessMessage = styled.p`
 `;
 
 // API service
-const API_URL = 'http://localhost:5000/api';
+// ... existing code ...
 
-// Authentication credentials (in a real app, these would come from a login process)
+// const API_URL = 'http://localhost:5000/api'; // Remover ou comentar a URL antiga
+// const API_URL = import.meta.env.VITE_API_URL; // Usar variável de ambiente
+const API_URL = '/api'; // Usar caminho relativo para Vercel Functions
+
+// Headers de autenticação (se necessário para a API)
 const authHeaders = {
   'username': 'admin',
   'password': 'admin123'
@@ -602,19 +606,16 @@ function Files() {
     navigate(`/admin/arquivos?edit=${resource.id}`);
   };
 
-  const handleDeleteResource = async (resourceId, resourceType) => {
-    if (!window.confirm('Tem certeza que deseja excluir este recurso?')) {
+  const handleDeleteResource = async (resource) => {
+    const resourceType = activeTab === 'files' ? 'files' : 'audios';
+    if (!window.confirm(`Tem certeza que deseja excluir este ${resourceType === 'files' ? 'arquivo' : 'áudio'}?`)) {
       return;
     }
 
     try {
-      const endpoint = resourceType === 'file'
-        ? `${API_URL}/files/${resourceId}`
-        : `${API_URL}/audios/${resourceId}`;
-        
-      const response = await fetch(endpoint, {
+      const response = await fetch(`${API_URL}/modules/${resource.lessonId}/${resourceType}/${resource.id}`, {
         method: 'DELETE',
-        headers: authHeaders
+        headers: authHeaders,
       });
 
       if (!response.ok) {

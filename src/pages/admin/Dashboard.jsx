@@ -103,7 +103,9 @@ const MenuDescription = styled.p`
 `;
 
 // API service
-const API_URL = 'http://localhost:5000/api';
+// const API_URL = 'http://localhost:5000/api'; // Remove or comment out old URL
+// const API_URL = import.meta.env.VITE_API_URL; // Use environment variable
+const API_URL = '/api'; // Use relative path for Vercel Functions
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -120,8 +122,8 @@ function Dashboard() {
       try {
         setLoading(true);
         
-        // Fetch modules from API
-        const response = await fetch(`${API_URL}/modules`);
+        // Fetch modules from API using the environment variable
+        const response = await fetch(`${API_URL}/modules`); 
         if (!response.ok) {
           throw new Error('Failed to fetch modules');
         }

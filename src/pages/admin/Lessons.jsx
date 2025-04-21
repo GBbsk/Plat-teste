@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Button from '../../components/button';
+import Button from '../../components/Button';
 
 // Definição da URL da API
 const API_URL = '/api'; // Usando o mesmo padrão de AdminModules.jsx

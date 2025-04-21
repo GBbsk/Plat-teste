@@ -180,7 +180,9 @@ const SuccessMessage = styled.p`
   margin-bottom: 1rem;
 `;
 
-const API_URL = '/api'; // Alterado para usar proxy
+// const API_URL = '/api'; // Remover ou comentar a URL antiga
+// const API_URL = import.meta.env.VITE_API_URL; // Usar variável de ambiente
+const API_URL = '/api'; // Usar caminho relativo para Vercel Functions
 
 const authHeaders = {
   username: 'admin',
@@ -205,8 +207,8 @@ function AdminModules() {
   const fetchModules = async () => {
     try {
       setLoading(true);
-      console.log('Fazendo requisição para /api/modules (AdminModules)');
-      const response = await fetch(`${API_URL}/modules`);
+      // Usar a variável de ambiente na chamada fetch
+      const response = await fetch(`${API_URL}/modules`); 
       console.log('Status da resposta (AdminModules):', response.status);
       if (!response.ok) {
         const text = await response.text();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Button from '../components/button';
+import Button from '../components/Button';
 import FileList from '../components/FileList';
 import AudioPlayer from '../components/audioplayer';
 
