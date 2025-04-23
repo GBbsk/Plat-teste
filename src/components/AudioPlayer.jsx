@@ -15,6 +15,19 @@ const AudioPlayerContainer = styled.div`
   }
 `;
 
+const TranscriptContainer = styled.div`
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px rgba(80, 112, 255, 0.07);
+  color: #334155;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-height: 260px;
+  overflow-y: auto;
+`;
+
 const AudioTitle = styled.h3`
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
@@ -133,10 +146,12 @@ const AudioPlayer = ({ title, description, audioUrl, transcript }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [activeTextIndex, setActiveTextIndex] = useState(null);
   const [volume, setVolume] = useState(1);
+  const [showTranscript, setShowTranscript] = useState(false);
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
 
+  // Atualiza o estado de isPlaying baseado no evento real do áudio
   useEffect(() => {
     const audio = audioRef.current;
 
@@ -163,14 +178,22 @@ const AudioPlayer = ({ title, description, audioUrl, transcript }) => {
       }
     };
 
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleEnded = () => setIsPlaying(false);
+
     audio.addEventListener('loadeddata', setAudioData);
     audio.addEventListener('timeupdate', setAudioTime);
-    audio.addEventListener('ended', () => setIsPlaying(false));
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('ended', handleEnded);
 
     return () => {
       audio.removeEventListener('loadeddata', setAudioData);
       audio.removeEventListener('timeupdate', setAudioTime);
-      audio.removeEventListener('ended', () => setIsPlaying(false));
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('ended', handleEnded);
     };
   }, [transcript]);
 
@@ -189,12 +212,12 @@ const AudioPlayer = ({ title, description, audioUrl, transcript }) => {
 
   const togglePlay = () => {
     if (!audioUrl || !audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
+    if (audioRef.current.paused) {
       audioRef.current.play().catch(() => {});
+    } else {
+      audioRef.current.pause();
     }
-    setIsPlaying(!isPlaying);
+    // Não altere isPlaying aqui, deixe os eventos cuidarem disso
   };
 
   const handleProgressChange = (e) => {
@@ -214,9 +237,8 @@ const AudioPlayer = ({ title, description, audioUrl, transcript }) => {
       setCurrentTime(time);
       setActiveTextIndex(index);
 
-      if (!isPlaying) {
+      if (audioRef.current.paused) {
         audioRef.current.play();
-        setIsPlaying(true);
       }
     }
   };
@@ -278,20 +300,33 @@ const AudioPlayer = ({ title, description, audioUrl, transcript }) => {
       </ProgressContainer>
 
       {transcript && transcript.length > 0 && (
-        <TranscriptContainer>
-          {transcript.map((item, index) => (
-            <TranscriptText
-              key={index}
-              $active={activeTextIndex === index}
-              onClick={() => handleTranscriptClick(index)}
-            >
-              {item.text}{' '}
-            </TranscriptText>
-          ))}
-        </TranscriptContainer>
+        <>
+          <Button
+            variant="outline"
+            size="small"
+            style={{ margin: '0.5rem 0' }}
+            onClick={() => setShowTranscript((prev) => !prev)}
+          >
+            {showTranscript ? 'Ocultar Transcrição' : 'Mostrar Transcrição'}
+          </Button>
+          {showTranscript && (
+            <TranscriptContainer>
+              {transcript.map((item, index) => (
+                <TranscriptText
+                  key={index}
+                  $active={activeTextIndex === index}
+                  onClick={() => handleTranscriptClick(index)}
+                >
+                  {item.text}{' '}
+                </TranscriptText>
+              ))}
+            </TranscriptContainer>
+          )}
+        </>
       )}
     </AudioPlayerContainer>
   );
 };
 
 export default AudioPlayer
+

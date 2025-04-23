@@ -311,39 +311,13 @@ function LessonDetail() {
                   {audio.description && (
                     <AudioDescription>{audio.description}</AudioDescription>
                   )}
-                  <StyledAudio controls>
-                    <source src={audio.audioUrl} type="audio/mp3" />
-                    Seu navegador não suporta o elemento de áudio.
-                  </StyledAudio>
-                  {audio.transcript && audio.transcript.length > 0 && (
-                    <>
-                      <Button
-                        variant="outline"
-                        size="small"
-                        style={{ margin: '0.5rem 0' }}
-                        onClick={() =>
-                          setShowTranscript(prev => ({
-                            ...prev,
-                            [audio.id]: !prev[audio.id]
-                          }))
-                        }
-                      >
-                        {showTranscript[audio.id] ? 'Ocultar Transcrição' : 'Mostrar Transcrição'}
-                      </Button>
-                      {showTranscript[audio.id] && (
-                        <div className="audio-transcript">
-                          <h4>Transcrição</h4>
-                          <ul>
-                            {audio.transcript.map((item, idx) => (
-                              <li key={idx}>
-                                <strong>{item.time}s:</strong> {item.text}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </>
-                  )}
+                  {/* Substitua o player nativo pelo componente AudioPlayer */}
+                  <AudioPlayer
+                    title={audio.title}
+                    description={audio.description}
+                    audioUrl={audio.fileUrl}
+                    transcript={audio.transcript}
+                  />
                 </AudioCard>
               ))}
             </AudioListWrapper>
