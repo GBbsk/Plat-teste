@@ -4,10 +4,10 @@ import { FaPlay, FaPause, FaVolumeUp, FaVolumeDown, FaStepBackward, FaStepForwar
 import Button from './Button';
 
 const AudioPlayerContainer = styled.div`
-  background-color: var(--card-bg);
+  background-color: ${({ theme }) => theme.cardBg};
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Idealmente, a sombra também viria do tema */
   margin-bottom: 2rem;
 
   @media (max-width: 576px) {
@@ -16,12 +16,12 @@ const AudioPlayerContainer = styled.div`
 `;
 
 const TranscriptContainer = styled.div`
-  background: #f8fafc;
+  background: ${({ theme }) => theme.cardBg};
   border-radius: 10px;
   padding: 1rem 1.2rem;
   margin-top: 1rem;
   box-shadow: 0 2px 8px rgba(80, 112, 255, 0.07);
-  color: #334155;
+  color: ${({ theme }) => theme.text};
   font-size: 1rem;
   line-height: 1.6;
   max-height: 260px;
@@ -32,11 +32,11 @@ const AudioTitle = styled.h3`
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: ${({ theme }) => theme.text};
 `;
 
 const AudioDescription = styled.p`
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
   font-size: 0.9rem;
   margin: 0 0 1.5rem;
 `;
@@ -59,7 +59,7 @@ const PlayerControls = styled.div`
 const ControlButton = styled.button`
   background: none;
   border: none;
-  color: var(--primary);
+  color: ${({ theme }) => theme.primary};
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.3rem;
@@ -70,7 +70,7 @@ const ControlButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: var(--primary-light, #e3eaff);
+    background: ${({ theme }) => theme.primaryLight};
   }
 
   @media (max-width: 576px) {
@@ -99,7 +99,7 @@ const ProgressContainer = styled.div`
 const ProgressBar = styled.div`
   width: 100%;
   height: 6px;
-  background-color: var(--border);
+  background-color: ${({ theme }) => theme.borderColor};
   border-radius: 3px;
   position: relative;
   cursor: pointer;
@@ -115,7 +115,7 @@ const TimeDisplay = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
 
   @media (max-width: 576px) {
     font-size: 0.7rem;
@@ -125,7 +125,7 @@ const TimeDisplay = styled.div`
 // Use $progress as a transient prop
 const Progress = styled.div`
   height: 100%;
-  background-color: var(--primary);
+  background-color: ${({ theme }) => theme.primary};
   border-radius: 3px;
   width: ${({ $progress }) => (isNaN($progress) ? 0 : $progress)}%;
   transition: width 0.1s linear;
@@ -133,7 +133,7 @@ const Progress = styled.div`
 
 // Use $active as a transient prop
 const TranscriptText = styled.span`
-  color: ${({ $active }) => $active ? 'var(--primary)' : 'var(--text-primary)'};
+  color: ${({ $active, theme }) => $active ? theme.primary : theme.text};
   font-weight: ${({ $active }) => $active ? '600' : '400'};
   transition: color 0.3s ease, font-weight 0.3s ease;
   cursor: pointer;

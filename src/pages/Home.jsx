@@ -6,8 +6,8 @@ import Button from '../components/Button';
 
 // Estilos
 const HeroSection = styled.section`
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: white;
+  background: linear-gradient(135deg, ${({ theme }) => theme.primary} 0%, ${({ theme }) => theme.primaryDark} 100%);
+  color: white; /* Mantido branco, assumindo bom contraste com o gradiente do tema */
   padding: 4rem 2rem;
   border-radius: 18px;
   margin-bottom: 3rem;
@@ -61,7 +61,7 @@ const SectionTitle = styled.h2`
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  color: var(--text-primary);
+  color: ${({ theme }) => theme.text};
   
   @media (max-width: 768px) {
     font-size: 1.6rem;
@@ -121,10 +121,10 @@ const FeaturesGrid = styled.div`
 `;
 
 const FeatureCard = styled.div`
-  background-color: var(--card-bg);
+  background-color: ${({ theme }) => theme.cardBg};
   border-radius: 8px;
   padding: 2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Idealmente, a sombra também viria do tema */
   text-align: center;
   
   @media (max-width: 768px) {
@@ -139,7 +139,7 @@ const FeatureCard = styled.div`
 
 const FeatureIcon = styled.div`
   font-size: 2.5rem;
-  color: var(--primary);
+  color: ${({ theme }) => theme.primary};
   margin-bottom: 1rem;
   
   @media (max-width: 768px) {
@@ -152,7 +152,7 @@ const FeatureTitle = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: ${({ theme }) => theme.text};
   
   @media (max-width: 576px) {
     font-size: 1.1rem;
@@ -160,7 +160,7 @@ const FeatureTitle = styled.h3`
 `;
 
 const FeatureDescription = styled.p`
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
   font-size: 0.9rem;
   
   @media (max-width: 576px) {
@@ -169,12 +169,12 @@ const FeatureDescription = styled.p`
 `;
 
 const CTASection = styled.section`
-  background-color: var(--card-bg);
+  background-color: ${({ theme }) => theme.cardBg};
   border-radius: 12px;
   padding: 3rem 2rem;
   text-align: center;
   margin: 4rem 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Idealmente, a sombra também viria do tema */
   
   @media (max-width: 768px) {
     padding: 2.5rem 1.5rem;
@@ -193,7 +193,7 @@ const CTATitle = styled.h2`
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: ${({ theme }) => theme.text};
   
   @media (max-width: 768px) {
     font-size: 1.6rem;

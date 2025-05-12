@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import Button from '../components/Button';
 
 const ModuleContainer = styled.div`
-  background-color: var(--card-bg);
+  background-color: ${({ theme }) => theme.cardBg};
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Idealmente, a sombra também viria do tema */
   margin-bottom: 2rem;
   
   @media (max-width: 576px) {
@@ -52,7 +52,7 @@ const ModuleTitle = styled.h1`
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: ${({ theme }) => theme.text};
   
   @media (max-width: 576px) {
     font-size: 1.5rem;
@@ -60,7 +60,7 @@ const ModuleTitle = styled.h1`
 `;
 
 const ModuleDescription = styled.p`
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
   font-size: 1rem;
   margin-bottom: 1rem;
 `;
@@ -72,7 +72,7 @@ const LessonsList = styled.div`
 `;
 
 const LessonCard = styled.div`
-  background-color: var(--background);
+  background-color: ${({ theme }) => theme.cardBg}; /* Alterado de var(--background) para theme.cardBg */
   border-radius: 8px;
   padding: 1.5rem;
   display: flex;
@@ -98,8 +98,8 @@ const LessonNumber = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: var(--primary);
-  color: white;
+  background-color: ${({ theme }) => theme.primary};
+  color: white; /* Mantido branco, assumindo bom contraste */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,11 +115,11 @@ const LessonTitle = styled.h3`
   font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 0.25rem;
-  color: var(--text-primary);
+  color: ${({ theme }) => theme.text};
 `;
 
 const LessonDescription = styled.p`
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
 `;
@@ -129,7 +129,7 @@ const LessonMeta = styled.div`
   align-items: center;
   gap: 1rem;
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
   
   @media (max-width: 576px) {
     flex-wrap: wrap;
@@ -153,7 +153,7 @@ const LoadingContainer = styled.div`
   align-items: center;
   min-height: 300px;
   font-size: 1.1rem;
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
 `;
 
 function ModuleDetail() {

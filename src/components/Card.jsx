@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 const CardContainer = styled.div`
-  background-color: var(--card-bg);
+  background-color: ${({ theme }) => theme.cardBg};
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(6,182,212,0.08);
+  box-shadow: 0 4px 16px rgba(6,182,212,0.08); /* Idealmente, a sombra também viria do tema */
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   height: 100%;
@@ -14,8 +14,8 @@ const CardContainer = styled.div`
 
   &:hover {
     transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 10px 32px rgba(6,182,212,0.13);
-    background: linear-gradient(120deg, var(--primary-light) 0%, var(--background-card) 100%);
+    box-shadow: 0 10px 32px rgba(6,182,212,0.13); /* Idealmente, a sombra também viria do tema */
+    background: linear-gradient(120deg, ${({ theme }) => theme.primaryLight} 0%, ${({ theme }) => theme.cardBg} 100%);
   }
 
   @media (max-width: 576px) {
@@ -61,7 +61,7 @@ const CardTitle = styled.h3`
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--primary-dark);
+  color: ${({ theme }) => theme.primaryDark};
 
   @media (max-width: 576px) {
     font-size: 1.1rem;
@@ -69,7 +69,7 @@ const CardTitle = styled.h3`
 `;
 
 const CardDescription = styled.p`
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
   font-size: 0.9rem;
   margin: 0 0 1rem;
   flex: 1;
@@ -83,8 +83,8 @@ const CardFooter = styled.div`
 `;
 
 const CardBadge = styled.span`
-  background-color: var(--primary);
-  color: white;
+  background-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.button.primaryText}; /* Reutilizando cor de texto do botão para contraste */
   font-size: 0.8rem;
   padding: 0.3rem 0.7rem;
   border-radius: 6px;

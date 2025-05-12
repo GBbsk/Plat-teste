@@ -11,7 +11,7 @@ const FileListTitle = styled.h3`
   margin: 0 0 1rem;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: ${({ theme }) => theme.text};
 `;
 
 const FileGrid = styled.div`
@@ -25,10 +25,10 @@ const FileGrid = styled.div`
 `;
 
 const FileCard = styled.div`
-  background-color: var(--card-bg);
+  background-color: ${({ theme }) => theme.cardBg};
   border-radius: 8px;
   padding: 1.25rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Idealmente, a sombra também viria do tema */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   
   &:hover {
@@ -61,11 +61,11 @@ const FileName = styled.h4`
   margin: 0 0 0.5rem;
   font-size: 1rem;
   font-weight: 500;
-  color: var(--text-primary);
+  color: ${({ theme }) => theme.text};
 `;
 
 const FileDescription = styled.p`
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
   font-size: 0.85rem;
   margin: 0 0 1rem;
   line-height: 1.4;

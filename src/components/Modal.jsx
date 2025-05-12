@@ -22,10 +22,10 @@ const ModalOverlay = styled.div.withConfig({
 const ModalContent = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== 'isOpen'
 })`
-  background-color: var(--card-bg);
+  background-color: ${({ theme }) => theme.cardBg};
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Idealmente, a sombra também viria do tema */
   width: 90%;
   max-width: 800px;
   max-height: 90vh;
@@ -43,18 +43,19 @@ const CloseButton = styled.button`
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: ${({ theme }) => theme.secondaryText};
   transition: color 0.3s ease;
   
   &:hover {
-    color: var(--text-primary);
+    color: ${({ theme }) => theme.text};
   }
 `;
 
 const ModalTitle = styled.h3`
   margin: 0 0 1rem;
   font-size: 1.5rem;
-  padding-right: 2rem;
+  padding-right: 2rem; /* Para não sobrepor o botão de fechar */
+  color: ${({ theme }) => theme.text}; /* Adicionado para garantir a cor do tema */
 `;
 
 const ModalBody = styled.div`
@@ -67,7 +68,7 @@ const ModalBody = styled.div`
 const FileViewer = styled.div`
   width: 100%;
   height: 70vh;
-  border: 1px solid var(--border);
+  border: 1px solid ${({ theme }) => theme.borderColor};
   border-radius: 4px;
   overflow: hidden;
   
