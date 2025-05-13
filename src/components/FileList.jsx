@@ -90,22 +90,9 @@ const FileList = ({ files = [] }) => {
     setSelectedFile(null);
   };
   
-  const getFileType = (fileUrl) => {
-    const extension = fileUrl.split('.').pop().toLowerCase();
-    
-    if (['pdf'].includes(extension)) return 'pdf';
-    if (['doc', 'docx'].includes(extension)) return 'doc';
-    if (['xls', 'xlsx'].includes(extension)) return 'xls';
-    if (['ppt', 'pptx'].includes(extension)) return 'ppt';
-    if (['zip', 'rar'].includes(extension)) return 'zip';
-    if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) return 'image';
-    
-    return 'other';
-  };
-  
-  const getFileExtension = (fileUrl) => {
-    return fileUrl.split('.').pop().toUpperCase();
-  };
+  // REMOVER AS SEGUINTES FUNÇÕES, POIS NÃO SERÃO MAIS NECESSÁRIAS AQUI
+  // const getFileType = (fileUrl) => { ... };
+  // const getFileExtension = (fileUrl) => { ... };
   
   if (!files.length) {
     return null;
@@ -116,12 +103,13 @@ const FileList = ({ files = [] }) => {
       <FileListTitle>Arquivos para Download</FileListTitle>
       <FileGrid>
         {files.map((file) => {
-          const fileType = getFileType(file.fileUrl);
-          const fileExtension = getFileExtension(file.fileUrl);
+          // Usar file.type diretamente do objeto de dados
+          const typeForIcon = file.type ? file.type.toLowerCase() : 'other';
+          const extensionForDisplay = file.type ? file.type.toUpperCase() : 'ARQUIVO'; // Fallback
 
           return (
             <FileCard key={file.id}>
-              <FileIcon type={fileType}>{fileExtension}</FileIcon>
+              <FileIcon type={typeForIcon}>{extensionForDisplay}</FileIcon>
               <FileName>{file.title}</FileName>
               <FileDescription>{file.description}</FileDescription>
               <FileActions>
@@ -154,7 +142,8 @@ const FileList = ({ files = [] }) => {
           onClose={handleCloseModal}
           title={selectedFile.title}
           fileUrl={selectedFile.fileUrl}
-          fileType={getFileType(selectedFile.fileUrl)}
+          // Passar o tipo do arquivo diretamente para o Modal
+          fileType={selectedFile.type ? selectedFile.type.toLowerCase() : 'other'}
         />
       )}
     </FileListContainer>

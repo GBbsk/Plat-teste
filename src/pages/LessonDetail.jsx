@@ -13,7 +13,7 @@ const PageWrapper = styled.div`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 1rem; // Ajustado para mobile, pode ser 0 se o header mobile for full-width
+    padding: 0.75rem; // Reduzindo um pouco o padding geral da página no mobile
   }
 `;
 
@@ -30,6 +30,10 @@ const ResponsiveVideoWrapper = styled.div`
     border-radius: 10px;
     border: none; // Geralmente não se aplica tema a bordas de iframe de vídeo
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 0.75rem; // Reduzido para mobile
+  }
 `;
 
 const TabsWrapper = styled.div`
@@ -40,11 +44,12 @@ const TabsWrapper = styled.div`
   gap: 1.5rem;
   font-size: 1rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) { // Ajuste para 768px para consistência
     gap: 1rem;
     font-size: 0.9rem;
     overflow-x: auto; // Permitir rolagem horizontal em telas pequenas
     padding-bottom: 2px; // Evitar que a borda inferior corte o indicador da aba
+    margin-top: 0.5rem; // Reduzido para mobile
   }
 `;
 
@@ -148,6 +153,10 @@ const ModuleReturnButton = styled(Button)`
   margin-bottom: 1.5rem; /* Ajuste este valor conforme necessário */
   display: block; /* Para garantir que a margem funcione como esperado */
   width: fit-content; /* Para que o botão não ocupe a largura total por padrão, a menos que o Button base já faça isso */
+
+  @media (max-width: 768px) {
+    margin-bottom: 0.75rem; // Reduzido ainda mais para mobile
+  }
 `;
 
 // Novo componente para o botão de alternar layout
@@ -443,6 +452,11 @@ const LessonHeaderDetails = styled.div`
   background-color: ${({ theme }) => theme.cardBg}; // Usando tema
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.cardBorder}; // Adicionando borda do card
+
+  @media (max-width: 768px) {
+    padding: 0.25rem 0.5rem; 
+    margin-bottom: 0.25rem; // Reduzido drasticamente para mobile
+  }
 `;
 
 const BreadcrumbsPath = styled.div`
@@ -456,6 +470,11 @@ const BreadcrumbsPath = styled.div`
     &:hover {
       text-decoration: underline;
     }
+
+    @media (max-width: 768px) {
+      font-size: 0.7rem; // Reduzido para mobile
+      margin-bottom: 0.15rem; // Reduzido para mobile
+    }
   }
 `;
 
@@ -464,6 +483,11 @@ const LessonTitleStyled = styled.h1`
   font-weight: 600;
   margin-bottom: 0.75rem;
   color: ${({ theme }) => theme.text}; // Usando tema
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem; // Reduzido mais para mobile
+    margin-bottom: 0.25rem; // Reduzido para mobile
+  }
 `;
 
 const LessonProgressStatus = styled.div`
@@ -480,17 +504,23 @@ const LessonProgressStatus = styled.div`
   }
 
   .module-progress-bar {
-    height: 8px;
+    height: 6px; // Barra de progresso um pouco mais fina
     background-color: ${({ theme }) => theme.borderColor}; // Usando tema
-    border-radius: 4px;
+    border-radius: 3px;
     overflow: hidden;
-    margin-top: 0.25rem;
+    margin-top: 0.15rem; // Reduzido margin-top
     
     div {
       height: 100%;
       background-color: ${({ theme }) => theme.primary}; // Usando tema
-      border-radius: 4px;
+      border-radius: 3px;
     }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem; // Reduzido para mobile
+    margin-bottom: 0.25rem; // Reduzido significativamente para mobile
+    gap: 0.15rem; // Reduzido para mobile
   }
 `;
 
@@ -498,6 +528,10 @@ const SidebarTitle = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
   color: ${({ theme }) => theme.text}; // Usando tema
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem; // Reduzido para mobile
+  }
 `;
 
 const NextLessonsList = styled.ul`
@@ -521,6 +555,12 @@ const ModuleLessonItem = styled.li`
     font-weight: ${({ $active }) => $active ? '600' : '400'};
     transition: background-color 0.2s, color 0.2s;
 
+    @media (max-width: 768px) {
+      font-size: 0.9rem; // Tamanho de fonte para os itens da lista no mobile
+      padding: 0.6rem;
+      gap: 0.5rem;
+    }
+
     &:hover {
       background-color: ${({ theme }) => theme.primaryLight}; // Usando tema
       color: ${({ theme }) => theme.primary}; // Usando tema
@@ -534,6 +574,10 @@ const ModuleLessonItem = styled.li`
       font-size: 1.1rem;
       color: ${({ theme, $completed, $active }) => $active ? theme.primary : ($completed ? theme.success : theme.secondaryText)}; // Usando tema
       opacity: ${({ $completed, $active }) => $active ? 1 : ($completed ? 1 : 0.5)};
+      
+      @media (max-width: 768px) {
+        font-size: 1rem; // Ícones um pouco menores no mobile
+      }
     }
   }
 `;
